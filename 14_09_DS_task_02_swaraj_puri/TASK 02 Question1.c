@@ -9,20 +9,20 @@ int Balance;
 
 void func(struct details *p,int n); // Question 1 function written  at end
 
-// Transcation Code
+// Transaction Code
 void trans(struct details *p,int n)
 {   int id;
     printf("Enter Account Number\n");
     scanf("%d",&id);
     int check=1;// to check if account number enter matches or not
-    for(int i=0;i<n;i++)
+    for(int i=0;i<n;i++,p++)
     {
-        if(p[i].A_num==id)
+        if(p->A_num==id)
         {   int option;
             int pay;
             int balance=p->Balance;
             int loop=1;
-            check=1;
+            check=0;
             while(loop){
             printf("Enter 1 for Deposit and 0 for Withdrawal\n");
             scanf("%d",&option);
@@ -37,9 +37,11 @@ void trans(struct details *p,int n)
                 case 0:printf(" Enter Amount to be withdrawn:\n");
                         scanf("%d",&pay);
                         if(balance>=pay)
-                        {   balance-=pay;
-                            printf("*************Withdrawn Successfully*************\n ");
+                        {
+                            balance-=pay;
+                            printf("\n*************Withdrawn Successfully*************\n ");
                             printf("Updated balance is : %d\n",balance);
+                            p->Balance=balance;//updating value where pointer is pointing
                         }
                         loop=0;
                         break;
@@ -48,6 +50,7 @@ void trans(struct details *p,int n)
 
             }
         }
+
 
     }
 
@@ -88,9 +91,11 @@ strcpy(arr[9].Name,"Cl10");
 
 func(arr,10); // for question a
 trans(arr,10);// for question b
+
+
 }
 //***********************************func()*********************************
- func(struct details *p,int n)
+ void func(struct details *p,int n)
  {
     printf("Account Info for Balance less than 100 \n");
     for(int i=0;i<n;i++)
