@@ -1,5 +1,6 @@
 #include<stdio.h>
-#include<stdlib.h>
+
+
 void main(){
 int n,*p;
 printf("Enter Elements to be allocate:");
